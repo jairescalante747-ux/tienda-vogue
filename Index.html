@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOGUE & CO. | Tienda de Moda y Accesorios</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #111111;
+            --accent: #c5a880;
+            --bg-light: #f9f9f9;
+            --text-muted: #666666;
+            --white: #ffffff;
+            --whatsapp-green: #25d366;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .announcement-bar {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            font-size: 0.85rem;
+            padding: 8px;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* --- FILTROS DE CATEGORÍAS --- */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-light);
+            border: 1px solid #e0e0e0;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--primary);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        /* --- CATÁLOGO DE PRODUCTOS --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            height: 320px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--bg-light);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: var(--white);
+            font-size: 0.75rem;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-add:hover {
+            background: var(--accent);
+        }
+
+        /* --- GLOBITO DE MENSAJE / CHAT FLOTANTE --- */
+        .chat-widget {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-tooltip {
+            background: var(--white);
+            color: var(--primary);
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            animation: bounce 2s infinite;
+        }
+
+        .chat-btn {
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 0.85rem;
+            color: #888;
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .chat-tooltip { display: none; } /* Ocultar texto del chat en móviles para ahorrar espacio */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Anuncio -->
+    <div class="announcement-bar">
+        Envío gratis en compras mayores a $80 | Descuentos de temporada
+    </div>
+
+    <!-- Navegación -->
+    <header>
+        <nav>
+            <a href="#" class="logo">VOGUE & CO.</a>
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#shop">Colección</a></li>
+                <li><a href="#">Ropa</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+            <div class="nav-icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <div class="cart-icon-container" id="cart-btn" title="Ver Carrito">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-badge" id="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>MODA Y ACCESORIOS URBANOS</h1>
+            <p>Ropa, lentes y gorros diseñados para complementar tu estilo único.</p>
+            <a href="#shop" class="btn">Ver Catálogo</a>
+        </div>
+    </section>
+
+    <!-- Catálogo de Productos -->
+    <main class="container" id="shop">
+        <h2 class="section-title">Explora Nuestros Productos</h2>
+        
+        <!-- Botones de Filtro -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('ropa')">Ropa</button>
+            <button class="filter-btn" onclick="filterProducts('gorros')">Gorros</button>
+            <button class="filter-btn" onclick="filterProducts('lentes')">Lentes</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- Ropa 1 -->
+            <div class="product-card" data-category="ropa">
+                <div class="product-image">
+                    <span class="tag">Nuevo</span>
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop" alt="Camiseta Oversize">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Ropa</div>
+                    <h3 class="product-title">Camiseta Minimal Oversize</h3>
+                    <div class="product-price">$45.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Gorro 1 -->
+            <div class="product-card" data-category="gorros">
+                <div class="product-image">
+                    <span class="tag" style="background: var(--accent);">Popular</span>
+                    <img src="https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?q=80&w=600&auto=format&fit=crop" alt="Gorro Beanie">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Gorros</div>
+                    <h3 class="product-title">Gorro Beanie de Lana</h3>
+                    <div class="product-price">$25.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Lentes 1 -->
+            <div class="product-card" data-category="lentes">
+                <div class="product-image">
+                    <span class="tag">Tendencia</span>
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?q=80&w=600&auto=format&fit=crop" alt="Lentes de Sol Retro">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Lentes</div>
+                    <h3 class="product-title">Lentes de Sol Retro Ovalados</h3>
+                    <div class="product-price">$38.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Ropa 2 -->
+            <div class="product-card" data-category="ropa">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=600&auto=format&fit=crop" alt="Chaqueta Urbana">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Ropa</div>
+                    <h3 class="product-title">Chaqueta Estilo Urbano</h3>
+                    <div class="product-price">$120.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Gorro 2 -->
+            <div class="product-card" data-category="gorros">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=600&auto=format&fit=crop" alt="Gorra Snapback">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Gorros</div>
+                    <h3 class="product-title">Gorra Urban Snapback</h3>
+                    <div class="product-price">$30.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Lentes 2 -->
+            <div class="product-card" data-category="lentes">
+                <div class="product-image">
+                    <span class="tag">Oferta</span>
+                    <img src="https://images.unsplash.com/photo-1508296695146-257a814070b4?q=80&w=600&auto=format&fit=crop" alt="Lentes Minimalist">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Lentes</div>
+                    <h3 class="product-title">Lentes Minimalist Black</h3>
+                    <div class="product-price">$42.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Ropa 3 -->
+            <div class="product-card" data-category="ropa">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?q=80&w=600&auto=format&fit=crop" alt="Abrigo de Lana">
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Ropa</div>
+                    <h3 class="product-title">Abrigo Long-Fit de Lana</h3>
+                    <div class="product-price">$150.00</div>
+                    <button class="btn-add" onclick="addToCart()">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- GLOBITO / BOTÓN FLOTANTE DE CONTACTO (WHATSAPP) -->
+    <div class="chat-widget">
+        <div class="chat-tooltip">¿Tienes dudas? ¡Escríbenos! 👋</div>
+        <a href="https://wa.me/1234567890?text=Hola,%20quisiera%20saber%20más%20sobre%20sus%20productos" target="_blank" class="chat-btn" title="Contactar por WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>VOGUE & CO.</h4>
+                <p style="color: #aaa; font-size: 0.9rem;">Tu destino preferido para ropa y accesorios contemporáneos.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Ayuda</h4>
+                <ul>
+                    <li><a href="#">Seguimiento de Envío</a></li>
+                    <li><a href="#">Devoluciones</a></li>
+                    <li><a href="#">Guía de Tallas</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categorías</h4>
+                <ul>
+                    <li><a href="#">Ropa</a></li>
+                    <li><a href="#">Gorros y Gorras</a></li>
+                    <li><a href="#">Lentes de Sol</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <p style="color: #aaa; font-size: 0.9rem;">Soporte 24/7 disponible a través de WhatsApp o correo electrónico.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 VOGUE & CO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Interactividad -->
+    <script>
+        // Contador de Carrito
+        let cartCount = 0;
+        function addToCart() {
+            cartCount++;
+            const badge = document.getElementById('cart-count');
+            badge.innerText = cartCount;
+            badge.style.transform = 'scale(1.3)';
+            setTimeout(() => { badge.style.transform = 'scale(1)'; }, 200);
+        }
+
+        // Filtro interactivo de categorías
+        function filterProducts(category) {
+            // Actualizar clase activa en los botones
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filtrar productos
+            const products = document.querySelectorAll('.product-card');
+            products.forEach(product => {
+                if (category === 'all' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
